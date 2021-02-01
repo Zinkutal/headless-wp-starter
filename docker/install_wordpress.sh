@@ -15,6 +15,12 @@ then
     echo
 fi
 
+composer config --global --auth github-oauth.github.com "$GITHUB_TOKEN_READ"
+PATH_OLD=$(pwd)
+cd /var/www/html/
+composer install
+cd "$PATH_OLD"
+
 if wp core is-installed
 then
     echo "WordPress is already installed, exiting."
@@ -44,15 +50,18 @@ wp theme activate postlight-headless-wp
 wp theme delete twentysixteen twentyseventeen twentynineteen twentytwenty
 
 wp plugin delete akismet hello
-wp plugin install --activate --force \
+wp plugin activate \
     acf-to-wp-api \
     advanced-custom-fields \
     custom-post-type-ui \
     wordpress-importer \
     wp-rest-api-v2-menus \
     jwt-authentication-for-wp-rest-api \
-    https://github.com/wp-graphql/wp-graphql/archive/v0.3.6.zip \
-    https://github.com/wp-graphql/wp-graphql-jwt-authentication/archive/V0.3.2.zip \
+    wp-graphql \
+    wp-graphql-acf \
+    wp-graphql-jwt-authentication
+# wp-migrate-pro
+wp plugin install --activate --force \
     /var/www/plugins/*.zip
 
 wp term update category 1 --name="Sample Category"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withApollo } from 'react-apollo';
+import { withApollo } from '@apollo/client/react/hoc';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 
@@ -33,12 +33,15 @@ const CATEGORY_QUERY = gql`
  * Fetch and display a Category
  */
 class Category extends Component {
-  state = {
-    category: {
-      name: '',
-      posts: [],
-    },
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: {
+        name: '',
+        posts: [],
+      },
+    };
+  }
 
   componentDidMount() {
     this.executeCategoryQuery();
@@ -82,7 +85,7 @@ class Category extends Component {
             {category.posts.map((post, index) => (
               <div key={post.node.slug}>
                 <h2 className="mt5">
-                  <Link to={post.node.link}>
+                  <Link id={index} to={post.node.link}>
                     {post.node.title}
                   </Link>
                 </h2>

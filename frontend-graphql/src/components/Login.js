@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
+import { Mutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import { AUTH_TOKEN, USERNAME } from '../constants';
 
@@ -32,11 +32,14 @@ const LOGIN_MUTATION = gql`
  * Login component that uses a graphql mutation
  */
 class Login extends Component {
-  state = {
-    username: '',
-    password: '',
-    message: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      message: '',
+    };
+  }
 
   confirm = async data => {
     const { history } = this.props;
@@ -87,7 +90,7 @@ class Login extends Component {
           >
             {mutation => (
               <button className="round-btn invert ba bw1 pv2 ph3" type="button" onClick={mutation}>
-                {'Log in'}
+                Log in
               </button>
             )}
           </Mutation>

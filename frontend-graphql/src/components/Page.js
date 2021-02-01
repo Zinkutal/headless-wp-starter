@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withApollo } from 'react-apollo';
+import { withApollo } from '@apollo/client/react/hoc';
 import gql from 'graphql-tag';
 
 /**
@@ -20,12 +20,15 @@ const PAGE_QUERY = gql`
  * Fetch and display a Page
  */
 class Page extends Component {
-  state = {
-    page: {
-      title: '',
-      content: '',
-    },
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: {
+        title: '',
+        content: '',
+      },
+    };
+  }
 
   componentDidMount() {
     this.executePageQuery();

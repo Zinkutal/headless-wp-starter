@@ -1,0 +1,57 @@
+{
+  "name": "cra/wordpress",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "alexandrkucherov",
+      "email": "avdkucherov@gmail.com"
+    }
+  ],
+  "require": {
+    "composer/installers": "^1.10",
+    "wpackagist-plugin/wp-graphql": "^1.1",
+    "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",
+    "wpackagist-plugin/wp-rest-api-v2-menus": "^0.8.1",
+    "wpackagist-plugin/wordpress-importer": "^0.7.0",
+    "wpackagist-plugin/custom-post-type-ui": "^1.8",
+    "wpackagist-plugin/advanced-custom-fields": "^5.9",
+    "wpackagist-plugin/acf-to-wp-api": "^1.4",
+    "wp-graphql/wp-graphql-jwt-authentication": "^0.4.1",
+    "wp-graphql/wp-graphql-acf": "^0.4.1"
+  }
+  ,
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
+    },
+    {
+      "type": "vcs",
+      "url":  "git@github.com:wp-graphql/wp-graphql-jwt-authentication.git"
+    },
+    {
+      "type": "vcs",
+      "url":  "git@github.com:wp-graphql/wp-graphql-acf"
+    }
+  ],
+  "extra": {
+    "installer-paths": {
+      "wp-content/plugins/{$name}": [
+        "type:wordpress-plugin",
+        "wp-graphql/wp-graphql-jwt-authentication",
+        "wp-graphql/wp-graphql-acf"
+      ],
+      "wp-content/themes/{$name}": ["type:wordpress-theme"],
+      "wp-content/mu-plugins/{$name}": ["type:wordpress-muplugin"]
+    }
+  }
+}

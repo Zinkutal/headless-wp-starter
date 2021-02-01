@@ -52,7 +52,7 @@ add_action(
             'RootQuery',
             'headerMenu',
             array(
-                'type'        => Types::list_of( new HeaderMenuType() ),
+                'type'        => array('list_of' => 'HeaderMenuType'), //Types::list_of( new HeaderMenuType() ),
                 'description' => __( 'Returns the header menu items', 'postlight-headless-wp' ),
                 'resolve'     => function () {
                     return get_items();

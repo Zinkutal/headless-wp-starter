@@ -39,15 +39,15 @@ class HeaderMenuType extends WPObjectType {
             self::$fields = function () {
                 $fields = array(
                     'label' => array(
-                        'type'        => Types::string(),
+                        'type'        => 'String',
                         'description' => __( 'The URL label', 'postlight-headless-wp' ),
                     ),
                     'url'   => array(
-                        'type'        => Types::string(),
+                        'type'        => 'String',
                         'description' => __( 'The URL', 'postlight-headless-wp' ),
                     ),
                     'type'  => array(
-                        'type'        => Types::string(),
+                        'type'        => 'String',
                         'description' => __( 'internal or external', 'postlight-headless-wp' ),
                     ),
                 );

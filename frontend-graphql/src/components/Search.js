@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withApollo } from 'react-apollo';
+import { withApollo } from '@apollo/client/react/hoc';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 /**
@@ -26,10 +26,13 @@ const POST_SEARCH_QUERY = gql`
  * Search component that fetches results by filter
  */
 class Search extends Component {
-  state = {
-    posts: [],
-    filter: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      filter: '',
+    };
+  }
 
   handleKeyDown = e => {
     if (e.keyCode === 13) {

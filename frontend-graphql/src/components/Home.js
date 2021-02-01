@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { withApollo } from 'react-apollo';
+import { withApollo } from '@apollo/client/react/hoc';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
-import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-boost';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { AUTH_TOKEN } from '../constants';
 import Config from '../config';
 import { ReactComponent as Logo } from '../static/images/starter-kit-logo.svg';
@@ -62,18 +60,21 @@ const PROTECTED_QUERY = gql`
 `;
 
 class Home extends Component {
-  state = {
-    userId: null,
-    page: {
-      title: '',
-      content: '',
-    },
-    pages: [],
-    posts: [],
-  };
-
   // used as a authenticated GraphQL client
   authClient = null;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: null,
+      page: {
+        title: '',
+        content: '',
+      },
+      pages: [],
+      posts: [],
+    };
+  }
 
   componentDidMount() {
     this.executePageQuery();
@@ -163,8 +164,9 @@ class Home extends Component {
 
   render() {
     const { page, posts, pages } = this.state;
+    const { userId } = this.state;
     return (
-      <div>
+      <div user_id={userId}>
         <div className="graphql intro bg-black white ph3 pv4 ph5-m pv5-l flex flex-column flex-row-l">
           <div className="color-logo w-50-l mr3-l">
             <Logo width={440} height={280} />
@@ -208,9 +210,8 @@ class Home extends Component {
                       </Link>
                     </li>
                   )
-                } else {
-                  return false;
                 }
+                return false;
               })}
             </ul>
           </div>

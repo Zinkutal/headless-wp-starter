@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withApollo } from 'react-apollo';
+import { withApollo } from '@apollo/client/react/hoc';
 import gql from 'graphql-tag';
 
 /**
@@ -22,15 +22,18 @@ const POST_QUERY = gql`
  * Fetch and display a Post
  */
 class Post extends Component {
-  state = {
-    post: {
-      title: '',
-      content: '',
-      author: {
-        nickname: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      post: {
+        title: '',
+        content: '',
+        author: {
+          nickname: '',
+        },
       },
-    },
-  };
+    };
+  }
 
   componentDidMount() {
     this.executePostQuery();
